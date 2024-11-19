@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
-import Login from 'C:/Users/Dhruv Jain/Desktop/Webtech/wtmp/src/components/Login.js'
-import Menu from 'C:/Users/Dhruv Jain/Desktop/Webtech/wtmp/src/components/Menu.js'
-import VegStarters from 'C:/Users/Dhruv Jain/Desktop/Webtech/wtmp/src/components/VegStarters.js'
+import Login from '../src/components/Login.js'
+import Menu from '../src/components/Menu.js'
+import VegStarters from '../src/components/VegStarters.js'
 import IceCreams from './components/IceCreams.js'
 import NonVegStarters from './components/nv.js'
 import Deserts from './components/deserts.js'
 import Salads from './components/Salads.js'
 import Lassis from './components/Lassis.js'
-import Home from 'C:/Users/Dhruv Jain/Desktop/Webtech/wtmp/src/components/Home.js'
+import Home from '../src/components/Home.js'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
