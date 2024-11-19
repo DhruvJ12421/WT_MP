@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Menu = () => {
@@ -45,25 +46,25 @@ const Menu = () => {
             id: 4,
             title: 'Soups',
             imgSrc: 'https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/em-soup-img.png',
-            link: '#',
+            link: 'soups',
         },
         {
             id: 6,
             title: 'Fish N Sea Food',
             imgSrc: 'https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/em-grilled-seafood-img.png',
-            link: '#',
+            link: 'Seafood',
         },
         {
             id: 7,
             title: 'Main Course',
             imgSrc: 'https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/em-hyderabadi-biryani-img.png',
-            link: '#',
+            link: 'MainCourse',
         },
         {
             id: 8,
             title: 'Noodles',
             imgSrc: 'https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/em-mushroom-noodles-img.png',
-            link: '#',
+            link: 'noodles',
         },
         {
             id: 9,
@@ -71,21 +72,18 @@ const Menu = () => {
             imgSrc: 'https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/em-gluten-img.png',
             link: 'Salads',
         },
-       
         {
             id: 10,
             title: 'Ice',
             imgSrc: 'https://imgs.search.brave.com/PcdcrHznm7RMwwlLtLi-XC6-Klbusg_hJhptQZep_7Q/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAxNi8x/MC8zMS8xOC8xNC9k/ZXNzZXJ0LTE3ODYz/MTFfNjQwLmpwZw',
             link: 'IceCreams',
         },
-       
         {
             id: 11,
             title: 'Lassi',
             imgSrc: 'https://imgs.search.brave.com/W3LSAxQZJS6NonfebfbPidJaSO8UHbHyM-XHsmX6hB4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy9m/L2YxL1NhbHRfbGFz/c2kuanBn',
             link: 'Lassis',
         },
-       
     ];
 
     const filteredItems = menuItems.filter((item) =>
@@ -99,26 +97,43 @@ const Menu = () => {
                 width: '100vw',
                 overflowX: 'hidden',
                 display: 'flex',
-                padding:"10px",
+                padding: '10px',
                 flexDirection: 'column',
                 backgroundColor: '#f8f9fa',
             }}
         >
-            <h1 id="displayName" style={{ textAlign: 'center', padding: '10px' }}>
-                Hey welcome {userName}
-            </h1>
+            {/* Navbar with Cart Icon */}
+            <div className="container d-flex justify-content-between align-items-center pt-3">
+                <h1 id="displayName" style={{ textAlign: 'center', padding: '10px' }}>
+                    Hey welcome {userName}
+                </h1>
 
-            {/* Search Box */}
-            <div className="container pt-5">
+                {/* Search Box */}
                 <input
                     type="text"
                     placeholder="Search menu..."
                     className="form-control mb-3"
                     value={searchTerm}
                     onChange={handleSearchChange}
+                    style={{ maxWidth: '250px' }}
                 />
+
+                {/* Cart Icon */}
+                <Link to="/cart">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        className="bi bi-cart-fill"
+                        viewBox="0 0 16 16"
+                    >
+                        <path d="M0 1a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1h10V1a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1h-2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2H0V1z" />
+                    </svg>
+                </Link>
             </div>
 
+            {/* Explore Menu */}
             <div className="explore-menu pt-5 pb-5" id="section-explore-menu">
                 <div className="container">
                     <div className="row">
