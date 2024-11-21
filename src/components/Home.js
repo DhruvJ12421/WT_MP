@@ -84,17 +84,18 @@ const Navbar = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup" style={{ width: '100%' }}>
                         <div className="navbar-nav ml-auto" style={{ textAlign: 'right', width: '100%' }}>
-                        <Link to="/whychooseus" className="nav-link active" id="navitems">
-                            Why Choose Us....?
-                        </Link>
-
+                            <a className="nav-link active" href="#section-wcu" id="navitems">
+                                Why Choose Us....? <span className="sr-only"></span>
+                            </a>
                             <a className="nav-link" href="Menu" id="navitems">
                                 Explore Menu
                             </a>
                             <a className="nav-link" href="#section-delivery-payment" id="navitems">
                                 Delivery and payments
                             </a>
-                            <Link to="/FollowUs" className="nav-link" id="navitems">Follow Us</Link>
+                            <a className="nav-link" href="#section-follow-us" id="navitems">
+                                Follow Us
+                            </a>
                         </div>
                     </div>
 
@@ -106,12 +107,8 @@ const Navbar = () => {
                 <div style={txtStyle}>
                     <h1 className="banner-heading mb-3">Get Delicious food anytime</h1>
                     <p className="banner-para mb-4">Eat Smart & Healthy</p>
-                    <Link to="/menu">
-                        <button style={buttonStyle1}>View Menu</button>
-                    </Link>
-                    <Link to="/login">
-                        <button style={buttonStyle2}>Order now</button>
-                    </Link>
+                    <button style={buttonStyle1} href="/Menu">View Menu</button>
+                    <button style={buttonStyle2}>Order now</button>
                 </div>
             </div>
         </div>

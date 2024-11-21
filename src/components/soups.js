@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import axios from 'axios';
 
-const Soups = () => {
+const soups = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [modalData, setModalData] = useState(null);
-  const [cart, setCart] = useState([]);  // State to track the cart
 
   const soups = [
     {
@@ -120,7 +118,7 @@ const Soups = () => {
       discount: "(19% off)",
     },
   ];
-
+  
   const filteredsoups = soups.filter((soups) =>
     soups.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -133,47 +131,8 @@ const Soups = () => {
     setModalData(null);
   };
 
-  // Function to handle Add to Cart with quantity
-  const handleAddToCart = async (soups) => {
-    try {
-      // Check if the item already exists in the cart
-      const itemIndex = cart.findIndex(item => item.name === soups.name);
-  
-      if (itemIndex !== -1) {
-        // Item already in cart, increase quantity
-        const updatedCart = [...cart];
-        updatedCart[itemIndex].quantity += 1;
-        setCart(updatedCart);
-      } else {
-        // Item not in cart, add with quantity 1
-        const updatedCart = [...cart, { ...soups, quantity: 1 }];
-        setCart(updatedCart);
-      }
-  
-      // Send only necessary data to the server
-      const cartItem = {
-        name: soups.name,
-        image: soups.image,
-        price: soups.price,
-        discountPrice: soups.discountPrice,
-        discount: soups.discount,
-        rating: soups.rating,
-        quantity: 1,  // Default to 1, you can update if required
-      };
-  
-      // Optionally send the updated cart data to your backend (if needed)
-      await axios.post("http://localhost:3001/cart/add", cartItem);
-  
-      alert("Item added to cart!");
-    } catch (error) {
-      console.error("Error adding item to cart", error);
-      alert("Failed to add item to cart");
-    }
-  };
-  
-
   return (
-    <div style={{ width: "100%", height: "100%", backgroundColor: "white", margin: "0", padding: "0", display: "flex", flexDirection: "column" }}>
+    <div style={{ width: "100%", height: "100%", backgroundColor: "white",margin: "0", padding: "0", display: "flex", flexDirection: "column" }}>
       {/* Search bar */}
       <div style={{ padding: "20px", textAlign: "center", flexShrink: 0 }}>
         <input
@@ -191,8 +150,18 @@ const Soups = () => {
         />
       </div>
 
-      {/* Soups cards */}
-      <div className="container" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around", padding: "20px", flexGrow: 1, overflow: "auto" }}>
+      {/* soups cards */}
+      <div
+        className="container"
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-around",
+          padding: "20px",
+          flexGrow: 1,
+          overflow: "auto",
+        }}
+      >
         {filteredsoups.map((soups, index) => (
           <div
             key={index}
@@ -210,7 +179,11 @@ const Soups = () => {
             onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
             onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
           >
-            <img src={soups.image} alt={soups.name} style={{ width: "100%", height: "200px", objectFit: "cover" }} />
+            <img
+              src={soups.image}
+              alt={soups.name}
+              style={{ width: "100%", height: "200px", objectFit: "cover" }}
+            />
             <div className="item-name" style={{ padding: "10px" }}>
               <h5>{soups.name}</h5>
             </div>
@@ -228,13 +201,6 @@ const Soups = () => {
                 {soups.discountPrice}
               </span>{" "}
               <span>{soups.discount}</span>
-            </div>
-
-            {/* Add to Cart Button */}
-            <div style={{ padding: "10px", textAlign: "center" }}>
-              <button onClick={() => handleAddToCart(soups)} style={{ padding: "10px 20px", backgroundColor: "#28a745", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer" }}>
-                Add to Cart
-              </button>
             </div>
           </div>
         ))}
@@ -280,13 +246,40 @@ const Soups = () => {
                 cursor: "pointer",
               }}
             >
-             &times;
+              &times;
             </span>
-            <img src={modalData.image} alt={modalData.name} style={{ width: "100%", height: "250px", objectFit: "cover", marginBottom: "20px" }} />
-            <div className="modal-item-name" style={{ fontSize: "20px", fontWeight: "bold" }}>{modalData.name}</div>
-            <div className="modal-rating" style={{ margin: "10px 0" }}>{modalData.rating}</div>
-            <div className="modal-price" style={{ fontSize: "18px", marginBottom: "10px" }}>{modalData.price}</div>
-            <div className="modal-discount" style={{ fontSize: "16px", color: "#888" }}>{modalData.discountPrice}</div>
+            <img
+              src={modalData.image}
+              alt={modalData.name}
+              style={{ width: "100%", height: "250px", objectFit: "cover", marginBottom: "20px" }}
+            />
+            <div className="modal-item-name" style={{ fontSize: "20px", fontWeight: "bold" }}>
+              {modalData.name}
+            </div>
+            <div className="modal-rating" style={{ margin: "10px 0" }}>
+              {modalData.rating}
+            </div>
+            <div className="modal-price" style={{ fontSize: "18px", marginBottom: "10px" }}>
+              {modalData.price}
+            </div>
+            <div className="modal-discount" style={{ fontSize: "16px", color: "#888" }}>
+              {modalData.discountPrice}
+            </div>
+            <button
+              className="order-now-modal"
+              style={{
+                padding: "10px 20px",
+                fontSize: "16px",
+                backgroundColor: "#28a745",
+                color: "#fff",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                marginTop: "20px",
+              }}
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       )}
@@ -294,4 +287,4 @@ const Soups = () => {
   );
 };
 
-export default Soups;
+export default soups;
